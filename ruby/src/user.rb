@@ -195,8 +195,8 @@ class Mercury::User
       @campaigns ||= {}
       @xml.scan(/<campaign(.*?)<\/campaign>/im) do |campaign|
         campaign = campaign.is_a?(Array) ? campaign.join : campaign.to_s
-  	    
-  	    @campaigns[/id=['"](.*?)['"](.*?)>/im.match(campaign)[1].to_i] = {
+        
+        @campaigns[/id=['"](.*?)['"](.*?)>/im.match(campaign)[1].to_i] = {
           "status_code" => /<status(.*?)code=['"](.*?)['"](.*?)>/im.match(campaign)[2].to_i, 
           "status"      => /<status(.*?)>\s*<!\[CDATA\[(.*?)\]\]>\s*<\/status>/im.match(campaign)[2]
         }
