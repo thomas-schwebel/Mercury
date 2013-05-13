@@ -112,17 +112,16 @@ class Mercury
     http_session.read_timeout = 90
     # Sets ssl.
     http_session.use_ssl = true
-		# Initializes request.
-		request = Net::HTTP::Post.new(uri.request_uri)
-		# Sets data.
-		request.set_form_data(params)
-		# Submits request.
-		http_response = http_session.request(request)
+    # Initializes request.
+    request = Net::HTTP::Post.new(uri.request_uri)
+    # Sets data.
+    request.set_form_data(params)
+    # Submits request.
+    http_response = http_session.request(request)
     # Raises an error if the http request failed.
     http_response.error! if http_response.class.is_a?(Net::HTTPSuccess)
-	
-		# Returns the HTTPResponse object.
-		http_response
+    # Returns the HTTPResponse object.
+    http_response
   end
   
   
@@ -139,6 +138,7 @@ class Mercury
   def self.make_response_object objectName, argHash=Hash.new
     
     raise(ArgumentError, "Invalid object name '" << objectName << "'!") if !URLS.has_key?(objectName)
+    
     Response.new(make_http_post(URLS[objectName], argHash).body)
     
     rescue Exception => e
