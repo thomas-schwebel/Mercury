@@ -157,10 +157,13 @@ class Mercury::Transaction
       @history ||= {}
   	  @xml.scan(/<event(.*?)<\/event>/) do |event|
   	    event = event.is_a?(Array) ? event.join : event.to_s
-  	    
+        
         match     = /timestamp=['"](.*?)['"](.*?)>\s*<!\[CDATA\[(.*?)\]\]>/im.match(event)
+        
         timestamp = match[1]
+        
   	    @history.include?(timestamp) ? @history[timestamp] << (match[3]) : @history[timestamp] = [match[3]]
+        
   	  end if @history.empty?
   	  @history
     end
